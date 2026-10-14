@@ -17,7 +17,7 @@
     <div class="container header-inner">
       <a href="#top" class="logo" aria-label="Archer Car Care home">
         <!-- Put your logo file as logo.png in the same folder -->
-        <img src="logo.png" alt="Archer Car Care" class="logo-img" width="140" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <img src="logo.png" alt="Archer Car Care" class="logo-img" width="1006" height="652" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <span class="logo-text" style="display:none;">
           <span class="logo-mark">Archer</span>
           <span class="logo-sub">Car Care</span>
@@ -36,7 +36,7 @@
         </a>
       </nav>
 
-      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <span class="hamburger"></span>
       </button>
     </div>
@@ -92,6 +92,8 @@
             class="hero-img"
             width="480"
             height="320"
+            decoding="async"
+            fetchpriority="high"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
           <!-- Fallback if no image is present yet -->
@@ -312,7 +314,7 @@
       <div class="footer-links">
         <a href="https://www.instagram.com/archercarcare/" target="_blank" rel="noopener noreferrer">Instagram</a>
       </div>
-      <p class="copyright">© <span id="year"></span> Archer Car Care</p>
+      <p class="copyright">© <span id="year">2026</span> Archer Car Care</p>
     </div>
   </footer>
 
