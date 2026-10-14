@@ -74,12 +74,12 @@ h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
 h3 { font-size: 1.125rem; }
 
 /* Balanced line lengths on modern browsers; ignored elsewhere */
-h2 { text-wrap: balance; }
+h1, h2 { text-wrap: balance; }
 
 .eyebrow {
   font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.75rem;
@@ -102,11 +102,11 @@ h2 { text-wrap: balance; }
 }
 
 .section {
-  padding: 4.5rem 0;
+  padding: 3rem 0;
 }
 
 .section-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   max-width: 36rem;
 }
 
@@ -117,6 +117,7 @@ h2 { text-wrap: balance; }
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.35rem;
+  min-height: 2.75rem; /* comfortable touch target */
   font-size: 0.9375rem;
   font-weight: 500;
   border-radius: var(--radius-sm);
@@ -211,7 +212,7 @@ button:focus-visible {
 }
 
 .logo-img {
-  height: 36px;
+  height: 44px;
   width: auto;
   max-width: 160px;
   object-fit: contain;          /* prevents stretching */
@@ -234,13 +235,38 @@ button:focus-visible {
 }
 
 .nav-desktop a:not(.btn) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* comfortable target on tablets */
   font-size: 0.9rem;
+  font-weight: 500;
   color: var(--text-muted);
   transition: color 0.2s ease;
 }
 
-.nav-desktop a:not(.btn):hover {
+.nav-desktop a:not(.btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.nav-desktop a:not(.btn):hover,
+.nav-desktop a:not(.btn):focus-visible {
   color: var(--text);
+}
+
+.nav-desktop a:not(.btn):hover::after,
+.nav-desktop a:not(.btn):focus-visible::after {
+  transform: scaleX(1);
 }
 
 /* Mobile menu toggle */
@@ -299,6 +325,17 @@ button:focus-visible {
   padding: 1rem 1.25rem 1.5rem;
 }
 
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.mobile-menu:not([hidden]) {
+  animation: menu-in 0.18s ease-out;
+}
+
 .mobile-menu nav {
   display: flex;
   flex-direction: column;
@@ -325,14 +362,14 @@ button:focus-visible {
 
 /* ========== Hero ========== */
 .hero {
-  padding: 3.5rem 0 4rem;
+  padding: 3rem 0 3.5rem;
   border-bottom: 1px solid var(--border-subtle);
 }
 
 .hero-inner {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2.25rem;
   align-items: center;
 }
 
@@ -382,12 +419,6 @@ button:focus-visible {
   background: var(--bg-card);
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-}
-
-.fallback-note {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  text-align: center;
 }
 
 .car-svg {
@@ -440,8 +471,8 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin: 0.25rem 0 0.5rem;
-  padding: 0.85rem 0;
+  margin: 0.25rem 0;
+  padding: 0.7rem 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -459,6 +490,8 @@ button:focus-visible {
   font-weight: 600;
   color: var(--text);
   letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 /* ========== How it works ========== */
@@ -481,6 +514,11 @@ button:focus-visible {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  transition: border-color 0.2s ease;
+}
+
+.step:hover {
+  border-color: rgba(139, 92, 246, 0.35);
 }
 
 .step-number {
@@ -501,7 +539,7 @@ button:focus-visible {
 
 /* ========== Service area ========== */
 .service-area {
-  padding: 3.5rem 0;
+  background: var(--bg);
 }
 
 .area-card {
@@ -534,21 +572,21 @@ button:focus-visible {
 
 /* ========== Portfolio ========== */
 .portfolio {
-  padding: 3.5rem 0;
+  background: var(--bg-elevated);
   border-top: 1px solid var(--border-subtle);
 }
 
 .portfolio-placeholder {
   text-align: center;
-  padding: 3.5rem 1.5rem;
+  padding: 2.75rem 1.5rem;
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-  background: var(--bg-elevated);
+  background: var(--bg-card);
 }
 
 .portfolio-icon {
   color: var(--text-dim);
-  margin: 0 auto 1.25rem;
+  margin: 0 auto 1rem;
   display: flex;
   justify-content: center;
 }
@@ -688,7 +726,11 @@ button:focus-visible {
   }
 
   .hero {
-    padding: 5rem 0 5.5rem;
+    padding: 4rem 0 4.5rem;
+  }
+
+  .section {
+    padding: 3.5rem 0;
   }
 }
 
@@ -731,15 +773,15 @@ button:focus-visible {
     flex-shrink: 0;
     max-width: min(420px, 45vw);
   }
-
-  .section {
-    padding: 5.5rem 0;
-  }
 }
 
 @media (min-width: 1024px) {
   .container {
     padding: 0 2rem;
+  }
+
+  .section {
+    padding: 4rem 0;
   }
 
   .hero-visual {
@@ -750,15 +792,20 @@ button:focus-visible {
 /* Small phones — tighter rhythm, comfortable tap targets */
 @media (max-width: 480px) {
   .section {
-    padding: 3.5rem 0;
+    padding: 2.75rem 0;
   }
 
   .section-header {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .hero {
-    padding: 2.75rem 0 3.25rem;
+    padding: 2.5rem 0 3rem;
+  }
+
+  .section-lead,
+  .hero-lead {
+    font-size: 1rem;
   }
 
   .hero-inner {
@@ -779,12 +826,7 @@ button:focus-visible {
   }
 
   .portfolio-placeholder {
-    padding: 2.5rem 1.25rem;
-  }
-
-  .portfolio,
-  .service-area {
-    padding: 3rem 0;
+    padding: 2.25rem 1.25rem;
   }
 }
 
